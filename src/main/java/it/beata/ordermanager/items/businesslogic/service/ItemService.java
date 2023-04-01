@@ -2,6 +2,7 @@ package it.beata.ordermanager.items.businesslogic.service;
 
 import it.beata.ordermanager.items.businesslogic.model.Item;
 import it.beata.ordermanager.items.outbound.ItemRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,14 +12,10 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class ItemService {
 
     private final ItemRepository itemRepository;
-
-    @Autowired
-    public ItemService (ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
 
     public Item createItem (Item item) {
 
@@ -94,10 +91,10 @@ public class ItemService {
         throw new RuntimeException("Errore di sistema, riprovare!");
     }
 
-    private void checkUniqueName(Item item) {
+    public void checkUniqueName(Item item) {
         log.info("CHECKING UNIQUE NAME '{}'", item.getName());
         Optional<Item> optionalItem = itemRepository.findByName(item.getName());
-        if (optionalItem.isPresent()) {
+        if (optionalItem.isPresent() && ! optionalItem.get().getId().equals( item.getId() )) {
             log.error("Nome già presente '{}'", item.getName());
             throw new RuntimeException("Nome già presente");
         }

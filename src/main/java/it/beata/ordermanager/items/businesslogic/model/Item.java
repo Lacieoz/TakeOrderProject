@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Document("items")
 @Builder
+@EqualsAndHashCode
 public class Item {
 
     @Id
