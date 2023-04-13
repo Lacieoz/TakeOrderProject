@@ -35,10 +35,9 @@ public class ItemService {
         throw new RuntimeException("Errore di sistema, riprovare!");
     }
 
-    public Item updateItem (String id, Item item) {
+    public Item updateItem (Item item) {
 
-        log.info("UPDATE ITEM id = '{}' , '{}'", id, item);
-        item.setId(id);
+        log.info("UPDATE ITEM id = '{}' , '{}'", item.getId(), item);
         try {
             return itemRepository.save(item);
         } catch (Exception exception) {

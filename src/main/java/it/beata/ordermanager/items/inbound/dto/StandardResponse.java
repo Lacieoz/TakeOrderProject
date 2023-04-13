@@ -9,9 +9,6 @@ import org.springframework.http.HttpStatus;
 import java.util.Date;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class StandardResponse {
 
     private String timestamp;

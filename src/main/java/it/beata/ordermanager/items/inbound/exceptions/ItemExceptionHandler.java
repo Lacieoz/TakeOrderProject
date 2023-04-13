@@ -18,10 +18,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ItemExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatusCode status,
-                                                                  WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request)
+    {
         StandardResponse response = new StandardResponse(
                 HttpStatus.BAD_REQUEST,
                 ((ServletWebRequest) request).getRequest().getRequestURI(),

@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,11 +65,10 @@ public class ItemServiceTest {
     public void updateItem () {
         // generate a random item
         Item item = easyRandom.nextObject(Item.class);
-        String id = "id";
 
         when(itemRepository.save(any(Item.class))).thenAnswer(AdditionalAnswers.returnsFirstArg());
 
-        Item itemUpdated = itemService.updateItem(id, item);
+        Item itemUpdated = itemService.updateItem(item);
 
         assertEquals(item, itemUpdated);
 
@@ -80,11 +78,10 @@ public class ItemServiceTest {
     public void updateItem_failure () {
         // generate a random item
         Item item = easyRandom.nextObject(Item.class);
-        String id = "id";
 
         when(itemRepository.save(any(Item.class))).thenThrow(new RuntimeException("already present"));
 
-        assertThrows(RuntimeException.class,  () -> itemService.updateItem(id, item));
+        assertThrows(RuntimeException.class,  () -> itemService.updateItem(item));
 
     }
 
